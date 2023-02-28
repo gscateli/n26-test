@@ -19,7 +19,7 @@ global with sharing class ContactProperties {
         get {
             return atmFeeOtherCurrencies;
         } set {
-            atmFeeOtherCurrencies = value == null ? 'Free' : value + '%';
+            atmFeeOtherCurrencies = Integer.valueOf(value) > 0 ? value + '%' : 'Free';
         }
     }
     public String cardReplacementCost {
