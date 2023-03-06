@@ -31,9 +31,9 @@ private class ContactsServiceTest {
                    FROM Case
                    LIMIT 1];
 
-        List<Contact> cttInfo = ContactInfoController.getContacts(cs.Id);
-        System.assertEquals('IT', cttInfo.get(0).Country__c);
-        System.assertEquals('Black', cttInfo.get(0).Card_type__c);
+        List<ContactProperties> cttInfo = ContactInfoController.getContacts(cs.Id);
+        System.assertEquals('IT', cttInfo.get(0).country);
+        System.assertEquals('Black', cttInfo.get(0).cardType);
 
     }
 

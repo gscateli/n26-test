@@ -1,10 +1,24 @@
 public with sharing class ContactsService {
     
     public ContactProperties getContactByUUID(Set<String> setExternalIds) {
-        ContactProperties cttProperties = new ContactProperties();
         ContactsSelector cttSelector = new ContactsSelector();
+                
+        return formatContactFields(cttSelector.selectById(setExternalIds));
+    }
+
+    public List<ContactProperties> getContactByCaseId(Id caseId){
+        ContactsSelector cttSelector = new ContactsSelector();
+        List<ContactProperties> lstCttProperties = new List<ContactProperties>();
         
-        List<Contact> lstContacts = cttSelector.selectById(setExternalIds);
+        lstCttProperties.add(formatContactFields(cttSelector.selectByCaseId(caseId)));
+
+        return lstCttProperties;
+    }
+
+
+    public ContactProperties formatContactFields(List<Contact> lstContacts) {
+
+        ContactProperties cttProperties = new ContactProperties();
 
         if (lstContacts.get(0).id != null) {
             cttProperties.id = lstContacts.get(0).Id;

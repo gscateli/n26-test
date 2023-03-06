@@ -32,7 +32,7 @@ public with sharing class ContactsSelector {
                               FROM Case 
                               WHERE Id =: caseId];
 
-        return [SELECT Id, FirstName, LastName, Country__c, Card_Type__c 
+        return [SELECT Id, FirstName, LastName, UUID__c, Country__c, Card_Type__c, Cost_per_Calendar_Month__r.Cost__c, ATM_Fee_Other_Currencies__r.ATM_Fee__c, Card_Replacement_Cost__r.Cost__c
                 FROM Contact 
                 WHERE Id =: lstCase.get(0).ContactId];
     }

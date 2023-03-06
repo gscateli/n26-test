@@ -1,8 +1,8 @@
 public with sharing class ContactInfoController {
     @AuraEnabled
-    public static List<Contact> getContacts(Id recordId){
-        ContactsSelector cttSelector = new ContactsSelector();
+    public static List<ContactProperties> getContacts(Id recordId){
+        ContactsService cttService = new ContactsService();
 
-        return cttSelector.selectByCaseId(recordId);
+        return cttService.getContactByCaseId(recordId);
     }
 }
