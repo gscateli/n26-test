@@ -5,6 +5,10 @@ public with sharing class ContactsSelector {
         return (List<Contact>) selectByContactExternalId(idSet);
     }
 
+    public List<Contact> selectByCaseId(Id caseId) {
+        return (List<Contact>) selectCttByCaseId(caseId);
+    }
+
     public List<Contact> selectByContactExternalId(Set<String> idSet) {
         List<Contact> cttLst = new List<Contact>();
 
@@ -21,5 +25,15 @@ public with sharing class ContactsSelector {
             
             return cttLst;
 
+    }
+
+    public List<Contact> selectCttByCaseId(Id caseId) {
+        List<Case> lstCase = [SELECT Id, ContactId 
+                              FROM Case 
+                              WHERE Id =: caseId];
+
+        return [SELECT Id, FirstName, LastName, Country__c, Card_Type__c 
+                FROM Contact 
+                WHERE Id =: lstCase.get(0).ContactId];
     }
 }

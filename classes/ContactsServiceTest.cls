@@ -1,8 +1,8 @@
 @IsTest
 private class ContactsServiceTest {
 
-    @isTest static void testGetCaseById() {
-        String recordId = createTestRecord();
+    @isTest static void testGetContactInfo() {
+        String recordId = createContact();
         // Set up a test request
         RestRequest request = new RestRequest();
         request.requestUri =
@@ -17,7 +17,37 @@ private class ContactsServiceTest {
         System.assertEquals('John', thisContact.firstName);
     }
 
-    static String createTestRecord() {       
+    @isTest static void testContactByCaseId() {
+        String externalId = createContact();
+
+        Contact ctt = [SELECT Id 
+                       FROM Contact 
+                       WHERE Uuid__c =:externalId]; 
+        
+        
+        createCase(ctt.Id);
+
+        Case cs = [SELECT Id
+                   FROM Case
+                   LIMIT 1];
+
+        List<Contact> cttInfo = ContactInfoController.getContacts(cs.Id);
+        System.assertEquals('IT', cttInfo.get(0).Country__c);
+        System.assertEquals('Black', cttInfo.get(0).Card_type__c);
+
+    }
+
+    static void createCase(Id cttId) {
+        Case cs = new Case(
+            Subject='Test Case',
+            ContactId=cttId,
+            Origin='Web' 
+        );
+
+        insert cs;
+    }
+
+    static String createContact() {       
         
         createFees();
 
@@ -38,6 +68,7 @@ private class ContactsServiceTest {
             );
 
         insert contactTest;
+
         return contactTest.Uuid__c;
     }          
 
