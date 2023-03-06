@@ -5,8 +5,8 @@
         component.set("v.Columns", [
             // {label:"First Name", fieldName:"FirstName", type:"text"},
             // {label:"Last Name", fieldName:"LastName", type:"text"},
-            {label:"Card Type", fieldName:"Card_Type__c", type:"text"},
-            {label:"Country", fieldName:"Country__c", type:"text"}
+            {label:"Card Type", fieldName:"cardType", type:"text"},
+            {label:"Country", fieldName:"country", type:"text"}
         ]);
         
         action.setParams({

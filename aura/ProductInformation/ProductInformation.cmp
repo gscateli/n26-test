@@ -1,8 +1,8 @@
 <aura:component controller="ContactInfoController" implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
     <aura:attribute name="recordId" type="Id" />
     <aura:attribute name="Account" type="Account" />
-    <aura:attribute name="Contacts" type="Contact" />
-    <aura:attribute name="ContactInfo" type="Contact" />
+    <aura:attribute name="Contacts" type="Object" />
+    <aura:attribute name="ContactInfo" type="Object" />
     <aura:attribute name="Columns" type="List" />
 
     <aura:handler name="init" value="{!this}" action="{!c.retrieveContactInfo}" />
@@ -13,8 +13,16 @@
                       layoutType="FULL"
                       />
 
-    <lightning:card iconName="standard:contact" title="{! 'Contact List for ' + v.ContactInfo.FirstName}">
-        <lightning:datatable data="{! v.Contacts }" columns="{! v.Columns }" keyField="Id" hideCheckboxColumn="true"/>
-        
+    <lightning:card iconName="standard:contact" title="{! v.ContactInfo.firstName + ' ' + v.ContactInfo.lastName + '\'s Contact Info'}">
+        <div class="slds-p-around_x-small">
+            <ul class="slds-has-dividers_top-space">
+                <li class="slds-item">Legal Country: {!v.ContactInfo.country}</li>
+                <li class="slds-item">Card Type: {!v.ContactInfo.cardType}</li>
+                <li class="slds-item">Cost per Calendar Month: {!v.ContactInfo.costCalendarMonth}</li>
+                <li class="slds-item">ATM Fee in Other Currencies: {!v.ContactInfo.atmFeeOtherCurrencies}</li>
+                <li class="slds-item">Card Replacement Cost: {!v.ContactInfo.cardReplacementCost}</li>
+            </ul>
+        </div>
+        <!-- <lightning:datatable data="{! v.Contacts }" columns="{! v.Columns }" keyField="Id" hideCheckboxColumn="true"/> -->
     </lightning:card>
 </aura:component>	
