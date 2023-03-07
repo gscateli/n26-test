@@ -16,11 +16,11 @@
     <lightning:card iconName="standard:contact" title="{! v.ContactInfo.firstName + ' ' + v.ContactInfo.lastName + '\'s Contact Info'}">
         <div class="slds-p-around_x-small">
             <ul class="slds-has-dividers_top-space">
-                <li class="slds-item">Legal Country: {!v.ContactInfo.country}</li>
-                <li class="slds-item">Card Type: {!v.ContactInfo.cardType}</li>
-                <li class="slds-item">Cost per Calendar Month: {!v.ContactInfo.costCalendarMonth}</li>
-                <li class="slds-item">ATM Fee in Other Currencies: {!v.ContactInfo.atmFeeOtherCurrencies}</li>
-                <li class="slds-item">Card Replacement Cost: {!v.ContactInfo.cardReplacementCost}</li>
+                <li class="slds-item"><b>Legal Country: </b>{!v.ContactInfo.country}</li>
+                <li class="slds-item"><b>Card Type: </b>{!v.ContactInfo.cardType}</li>
+                <li class="slds-item"><b>Cost per Calendar Month: </b>{!v.ContactInfo.costCalendarMonth}</li>
+                <li class="slds-item"><b>ATM Fee in Other Currencies: </b>{!v.ContactInfo.atmFeeOtherCurrencies}</li>
+                <li class="slds-item"><b>Card Replacement Cost: </b>{!v.ContactInfo.cardReplacementCost}</li>
             </ul>
         </div>
         <!-- <lightning:datatable data="{! v.Contacts }" columns="{! v.Columns }" keyField="Id" hideCheckboxColumn="true"/> -->
