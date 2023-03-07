@@ -27,9 +27,9 @@ public with sharing class ContactsService {
             cttProperties.lastName = lstContacts.get(0).LastName;
             cttProperties.country = lstContacts.get(0).Country__c;
             cttProperties.cardType = lstContacts.get(0).Card_Type__c;
-            cttProperties.costCalendarMonth = String.valueOf(lstContacts.get(0).Cost_per_Calendar_Month__r.Cost__c);
-            cttProperties.atmFeeOtherCurrencies = String.valueOf(lstContacts.get(0).ATM_Fee_Other_Currencies__r.ATM_Fee__c);
-            cttProperties.cardReplacementCost = String.valueOf(lstContacts.get(0).Card_Replacement_Cost__r.Cost__c);
+            cttProperties.costCalendarMonth = String.valueOf(lstContacts.get(0).Product__r.CostCalendarMonth__c);
+            cttProperties.atmFeeOtherCurrencies = String.valueOf(lstContacts.get(0).Product__r.ATMFeesOtherCurrencies__c);
+            cttProperties.cardReplacementCost = String.valueOf(lstContacts.get(0).Product__r.CardReplacementCost__c);
         } else {
             cttProperties.description = 'No contacts found with this external Id.';
         }

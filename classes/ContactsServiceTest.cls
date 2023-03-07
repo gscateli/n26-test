@@ -13,8 +13,10 @@ private class ContactsServiceTest {
         // Call the method to test
         ContactProperties thisContact = ContactsController.getContactByUUID();
         // Verify results
-        System.debug(thisContact);
         System.assertEquals('John', thisContact.firstName);
+        System.assertEquals('IT', thisContact.country);
+        System.assertEquals('Black', thisContact.cardType);
+
     }
 
     @isTest static void testContactByCaseId() {
@@ -49,11 +51,9 @@ private class ContactsServiceTest {
 
     static String createContact() {       
         
-        createFees();
+        createProduct();
 
-        Id calendarCost = [SELECT Id FROM Cost_Calendar_Month__c LIMIT 1].Id;
-        Id atmCost = [SELECT Id FROM ATM_Fees_Other_Currencies__c LIMIT 1].Id;
-        Id replacementCost  = [SELECT Id FROM Card_Replacement_Cost__c LIMIT 1].Id;
+        Id productId = [SELECT Id FROM Product__c LIMIT 1].Id;
 
         // Create test record
         Contact contactTest = new Contact(
@@ -62,9 +62,7 @@ private class ContactsServiceTest {
             Country__c = 'IT',
             Card_Type__c = 'Black',
             Uuid__c = 'TEST-001-N26',
-            Cost_per_Calendar_Month__c = calendarCost,
-            ATM_Fee_Other_Currencies__c = atmCost,
-            Card_Replacement_Cost__c = replacementCost
+            Product__c = productId
             );
 
         insert contactTest;
@@ -72,33 +70,17 @@ private class ContactsServiceTest {
         return contactTest.Uuid__c;
     }          
 
-    static void createFees() {
-        Cost_Calendar_Month__c calendarItBlack = new Cost_Calendar_Month__c(
+    static void createProduct() {
+        Product__c productItBlack = new Product__c(
             Name = 'IT Black',
             Country__c = 'IT',
-            Card_Type__c = 'Black',
-            Cost__c = 9.90
+            CardType__c = 'Black',
+            CostCalendarMonth__c = 9.90,
+            ATMFeesOtherCurrencies__c = 0.00,
+            CardReplacementCost__c = 6.00
         );
 
-        insert calendarItBlack;
-
-        ATM_Fees_Other_Currencies__c atmItBlack = new ATM_Fees_Other_Currencies__c(
-            Name = 'IT Black',
-            Country__c = 'IT',
-            Card_Type__c = 'Black',
-            ATM_Fee__c = 0.00
-        ); 
-
-        insert atmItBlack;
-
-        Card_Replacement_Cost__c cardItBlack = new Card_Replacement_Cost__c(
-            Name = 'IT Black',
-            Country__c = 'IT',
-            Card_Type__c = 'Black',
-            Cost__c = 6.00
-        );
-
-        insert cardItBlack;
+        insert productItBlack;
 
     }
 }
